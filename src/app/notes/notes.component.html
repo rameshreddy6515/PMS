@@ -1,0 +1,29 @@
+<!-- <mat-sidenav-container>
+  <mat-sidenav> -->
+
+<mat-sidenav-container class="layoutMenu">
+      <mat-sidenav
+        #sidenav
+        mode="side"
+        [(opened)]="isMenubar"
+        class="layout-menu">
+        <mat-list>
+          <button
+          class="position-button position-button_blue"
+          mat-raised-button (click)="createNote()">Compose</button> 
+          <mat-list-item  routerLinkActive="active" (click)="showInbox()">
+            <mat-icon>inbox</mat-icon> Inbox
+          </mat-list-item>
+            <mat-list-item  routerLinkActive="active" (click)="showSentbox()">
+              <mat-icon>send</mat-icon> Sent
+            </mat-list-item>
+      </mat-list> 
+      </mat-sidenav>
+      <mat-sidenav-content class="layout-content">
+        <app-allitems [hidden]="isInbox"></app-allitems>
+        <app-sent [hidden]="isSentbox"></app-sent>
+        
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  <!-- </mat-sidenav>
+  </mat-sidenav-container> -->

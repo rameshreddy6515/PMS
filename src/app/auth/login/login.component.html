@@ -1,0 +1,60 @@
+
+  <mat-tab-group>
+    <mat-tab label="Login">
+      <h2 style="text-align: center">
+        Login<br />
+        <mat-icon>account_box</mat-icon>
+      </h2>
+      <form [formGroup]="userLoginForm" (ngSubmit)="(onLogin)">
+      <mat-form-field appearance="fill" class="login-form">
+        <mat-label>Email/Username</mat-label>
+        <input matInput class="form-control" formControlName="email" />
+        <mat-icon matSuffix> email</mat-icon> </mat-form-field><br />
+      <mat-form-field appearance="fill">
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          class="form-control"
+          formControlName="password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button> </mat-form-field
+      ><br />
+
+      <button
+        style="margin-left: 20px"
+        mat-raised-button
+        color="primary"
+        (click)="onLogin()"
+      >
+        Login
+      </button>
+      <button (click)="openRegsterDialog()"style="margin-left: 15px"mat-raised-button color="primary">
+        Register</button>
+    </form>
+    </mat-tab>
+
+    <mat-tab label="Forgot Password">
+      <mat-form-field appearance="fill" class="login-form">
+        <mat-label>Email/Username</mat-label>
+        <input matInput style="text-align: center" />
+        <mat-icon matSuffix> email</mat-icon> </mat-form-field
+      ><br />
+
+      <button
+        (click)="openDialog()"
+        style="margin-left: 50px"
+        mat-raised-button
+        color="primary">
+        Submit
+      </button>
+    </mat-tab>
+  </mat-tab-group>

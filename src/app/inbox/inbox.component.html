@@ -1,0 +1,83 @@
+<mat-card class="employee-table-wrapper">
+  <mat-card-title class="employee-table-wrapper__header">
+    <p *ngIf="!isShowFilterInput" class="employee-table-wrapper__title">Employee List</p>
+    <!-- <div *ngIf="isShowFilterInput" class="employee-table-wrapper__search">
+      <div class="employee-table-wrapper__icon-wrapper">
+        <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+      </div>
+      <input matInput class="employee-table-wrapper__search-input" >
+      <button class="employee-table-wrapper__button" mat-mini-fab>
+        <mat-icon class="employee-table-wrapper__icon">close</mat-icon>
+      </button>
+    </div> 
+    <button class="employee-table-wrapper__button" mat-mini-fab >
+      <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
+    </button>-->
+    <button class="settings-button" mat-mini-fab [matMenuTriggerFor]="settings">
+      <mat-icon class="settings-button__icon">more_vert</mat-icon>
+    </button>
+    <div class="settings-menu">
+      <mat-menu #settings="matMenu" xPosition="before">
+        <button class="settings-menu__item" mat-menu-item>Edit</button>
+        <button class="settings-menu__item" mat-menu-item>Copy</button>
+        <button class="settings-menu__item" mat-menu-item>Delete</button>
+        <button class="settings-menu__item" mat-menu-item>Print</button>
+      </mat-menu>
+    </div>
+  </mat-card-title>
+  <mat-card-content class="employee-table__content">
+    <table class="employee-table__table" mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="meetingTitle" >
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.meetingTitle}} </td>
+      </ng-container>
+
+      <!-- Company Column -->
+      <ng-container matColumnDef="description">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Description </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <!-- City Column -->
+      <ng-container matColumnDef="physician">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Physician </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.physician}} </td>
+      </ng-container>
+
+      <!-- State Column -->
+      <ng-container matColumnDef="date">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.date}} </td>
+      </ng-container>
+      <ng-container matColumnDef="time">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Time </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.time}} </td>
+      </ng-container>
+      <ng-container matColumnDef="editHistory">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> Edit History </th>
+        <td class="employee-table__table-body" mat-cell *matCellDef="let element"> {{element.editHistory}} </td>
+      </ng-container>
+      
+     
+      <ng-container matColumnDef="button">
+        <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> New </th>
+      <td  class="employee-table__table-body" mat-cell *matCellDef="let element"> <div class="position-buttons-wrapper">
+        <button
+          class="position-button position-button_blue"
+          mat-raised-button
+        >Info Message</button></div>
+      </td>
+      </ng-container> 
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr  [ngStyle]="row.date.getDate() == todayDate.getDate() ? {background: 'hsl(89, 43%, 51%)'}: {background: 'white'} " mat-row *matRowDef="let row; columns: displayedColumns ;"
+      >
+      </tr>
+    </table>
+  </mat-card-content>
+  <div class="pagination">
+    <mat-paginator [pageSizeOptions]="[10, 15, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</mat-card>

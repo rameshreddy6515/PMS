@@ -1,0 +1,39 @@
+@import "src/app/styles/variables";
+@import "src/app/styles/colors";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.dialog-headline{
+  font-size: 20px;
+}
+.close-icon{
+  margin-left: 220px;
+  float: right;
+}
+textarea.mat-input-element{
+resize:none;
+} 
+.position-button {
+  height: 40px;
+  border: blue;
+  display: block;
+  color: white;
+  margin-left: 35px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 120px;
+  &_blue {
+    background-color: $blue;
+  }
+
+  &_pink {
+    background-color: $pink;
+  }
+
+  &_green {
+    background-color: $green;
+  }
+}

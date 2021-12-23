@@ -1,0 +1,15 @@
+<div>
+    <mat-icon mat-dialog-close class="pull-right close-icon">close</mat-icon>
+    <h4 class="dialog-headline">Reply
+  </h4>
+   </div>
+  <form class="replyForm" [formGroup]="replyform">
+  <mat-form-field appearance="fill">
+    <mat-label >Response</mat-label>
+    <input formControlName="response" matInput required>
+  </mat-form-field>
+  <button
+  class="position-button position-button_blue"
+  mat-raised-button (click)="submitReply()">Reply</button> 
+  </form>
+  

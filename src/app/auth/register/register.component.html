@@ -1,0 +1,103 @@
+<form [formGroup]="userRegister">
+  <h2 style="text-align: center">User Registration</h2>
+  <!-- <label>Title</label> -->
+
+  <!-- <mat-radio-group
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group"
+    [(ngModel)]="selectedTitle"
+  >
+    <mat-radio-button
+      class="example-radio-button"
+      *ngFor="let title of titles"
+      [value]="title"
+    >
+      {{ title }}
+    </mat-radio-button>
+  </mat-radio-group> -->
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>First Name</mat-label>
+    <input matInput placeholder="Ex. John" formControlName="firstName" />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Last Name</mat-label>
+    <input matInput placeholder="Ex. valle" formControlName="lastName" />
+  </mat-form-field>
+
+  <br />
+  <br />
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="Ex. John@domain.com" formControlName="email" />
+    <mat-icon matSuffix> email</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="example-full-width">
+    <mat-label>Date Of Birth</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="dob" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <div>
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Contact Number</mat-label>
+      <input
+        matInput
+        ng2TelInput
+        formControlName="contactNumber"
+      /> </mat-form-field
+    ><br />
+
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        formControlName="confirmPassword"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <button style="margin-left: 180px" mat-raised-button color="accent">
+    Save
+  </button>
+  <button
+    (click)="onRegister()"
+    style="margin-left: 20px"
+    mat-raised-button
+    color="primary"
+  >
+    Submit
+  </button>
+</form>

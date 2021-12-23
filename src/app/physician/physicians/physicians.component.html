@@ -1,0 +1,67 @@
+<form [formGroup]="physicianService.form" class="normal-form">
+  <mat-grid-list cols="2" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>First Name</mat-label>
+          <input [(ngModel)]="physician.firstName" formControlName="firstName" matInput placeholder="First Name"
+            appearance="fill">
+          <mat-error>First Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input [(ngModel)]="physician.lastName" formControlName="lastName" matInput placeholder="Last Name">
+          <mat-error>Last Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Email address</mat-label>
+          <input [(ngModel)]="physician.emailId" formControlName="emailId" matInput placeholder="Email address">
+          <mat-error>Email address is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Employee ID</mat-label>
+          <input [(ngModel)]="physician.empId" formControlName="empId" matInput placeholder="Employee ID">
+          <mat-error>Employee ID is required</mat-error>
+        </mat-form-field>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <div class="add-bottom-padding" >
+          <mat-radio-group formControlName="title" name="title" required>
+            <mat-radio-button checked="false" value="Mr.">Mr.</mat-radio-button>
+            <mat-radio-button value="Mrs.">Mrs.</mat-radio-button>
+          </mat-radio-group>
+          <!-- </mat-radio-group> -->
+        </div>
+        <div>
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-select formControlName="role" placeholder="Role">
+              <mat-option>Select Role</mat-option>
+              <ng-container *ngFor="let role of roles">
+                <mat-option value="{{role.value}}">{{role.value}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>Role is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <input [(ngModel)]="physician.dob" formControlName="dob" matInput [matDatepicker]="picker"
+            placeholder="Date Of Birth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error>Date Of Birth is required</mat-error>
+        </mat-form-field>
+        <div class="button-row">
+          <button mat-raised-button color="primary" type="submit" [disabled]="physicianService.form.invalid"
+            (click)="onSubmit()">Submit</button>
+          <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

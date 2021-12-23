@@ -1,0 +1,46 @@
+@import "src/app/styles/colors";
+@import "src/app/styles/font";
+@import "src/app/styles/variables";
+
+.example-card{
+  border-radius: 20px;
+}
+.position-button {
+  width: 110px;
+  border-radius: 25px;
+  border: none;
+  color: white;
+  height: 30px;
+  cursor: pointer;
+  &_blue {
+    background-color: $blue;
+  }
+
+  &_pink {
+    background-color: $pink;
+  }
+
+  &_green {
+    background-color: $green;
+  }
+}
+.position-button-edit-history {
+  width: 110px;
+  border-radius: 25px;
+  margin-left: 140px;
+  height: 30px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  &_blue {
+    background-color: $blue;
+  }
+
+  &_pink {
+    background-color: $pink;
+  }
+
+  &_green {
+    background-color: $green;
+  }
+}

@@ -1,0 +1,169 @@
+<mat-card class="sent-table-wrapper">
+  <mat-card-title class="sent-table-wrapper__header">
+    <p *ngIf="!isShowFilterInput" class="sent-table-wrapper__title">
+     Sent Items
+    </p>
+
+    <button class="settings-button" mat-mini-fab [matMenuTriggerFor]="settings">
+      <mat-icon class="settings-button__icon">more_vert</mat-icon>
+    </button>
+    <div class="settings-menu">
+      <mat-menu #settings="matMenu" xPosition="before">
+        <button
+          class="settings-menu__item"
+          mat-menu-item
+          (click)="deleteCall()"
+          [disabled]="deleteButton"
+        >
+          Delete
+        </button>
+      </mat-menu>
+    </div>
+  </mat-card-title>
+  <!-- >>>>>>>>>{{dataSource}}
+    <li *ngFor="let item of dataSource; index as i;">{{item.receiverName}}</li> -->
+  <mat-card-content class="sent-table__content">
+    <table
+      class="sent-table__table"
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      (matSortChange)="sortData($event)"
+    >
+      <ng-container matColumnDef="id">
+        <th
+          class="sent-table__table-checkbox"
+          mat-header-cell
+          *matHeaderCellDef
+        >
+        </th>
+
+        <td
+          class="sent-table__table-checkbox"
+          mat-header-cell
+          *matCellDef="let element"
+        >
+          <mat-checkbox
+          (click)="operationRow(element.id)"
+          name="{{element.id}}"
+          (change)="onChangeOfSelect($event)"
+          [checked]="currentlyChecked === check_box_type.MODIFY_A_JOB" (click)="selectCheckBox(check_box_type.MODIFY_A_JOB)"
+         
+          >
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="message">
+        <th
+          class="sent-table__table-header"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Message
+        </th>
+        <td class="sent-table__table-body" mat-cell *matCellDef="let element">
+          {{ element.message }}
+        </td>
+      </ng-container>
+
+      <!-- Company Column -->
+      <ng-container matColumnDef="receiverName">
+        <th class="sent-table__table-header" mat-header-cell *matHeaderCellDef>
+          Receiver Name
+        </th>
+        <td class="sent-table__table-body" mat-cell *matCellDef="let element">
+          {{ element.receiverName }}
+        </td>
+      </ng-container>
+
+      <!-- City Column -->
+      <ng-container matColumnDef="receiverType">
+        <th class="sent-table__table-header" mat-header-cell *matHeaderCellDef>
+          Receiver Designation
+        </th>
+        <td class="sent-table__table-body" mat-cell *matCellDef="let element">
+          {{ element.receiverType }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="response">
+        <th class="sent-table__table-header" mat-header-cell *matHeaderCellDef>
+          Response
+        </th>
+        <td class="sent-table__table-body" mat-cell *matCellDef="let element">
+          {{ element.response }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="urgencyLevel">
+        <th class="sent-table__table-header" mat-header-cell *matHeaderCellDef>
+          Urgency Level
+        </th>
+        <td class="sent-table__table-body" mat-cell *matCellDef="let element">
+          {{ element.urgencyLevel }}
+        </td>
+      </ng-container>
+
+      <!-- State Column -->
+      <ng-container matColumnDef="date">
+        <th
+          class="sent-table__table-header"
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+        >
+          Date
+        </th>
+        <td class="sent-table__table-body" mat-cell *matCellDef="let element">
+          {{ element.date| date }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="time">
+        <th class="sent-table__table-header" mat-header-cell *matHeaderCellDef>
+          Time
+        </th>
+        <td class="sent-table__table-body" mat-cell *matCellDef="let element">
+          {{ element.time }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="editHistory">
+        <th class="sent-table__table-header" mat-header-cell *matHeaderCellDef>
+          Edit History
+        </th>
+        <td class="sent-table__table-body" mat-cell *matCellDef="let element">
+          {{ element.editHistory }}
+        </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="button">
+          <th class="employee-table__table-header" mat-header-cell *matHeaderCellDef> New </th>
+        <td  class="employee-table__table-body" mat-cell *matCellDef="let element"> <div class="position-buttons-wrapper">
+          <button
+            class="position-button position-button_blue"
+            mat-raised-button
+          >Info Message</button></div>
+        </td>
+        </ng-container>  -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <!-- <tr  [ngStyle]="row.date.getDate() == todayDate.getDate() ? {background: 'hsl(89, 43%, 51%)'}: {background: 'white'} " mat-row *matRowDef="let row; columns: displayedColumns ;"
+        > -->
+      <tr
+        [ngStyle]="
+          row.date < todayDate
+            ? { background: 'hsl(89, 43%, 51%)' }
+            : { background: 'white' }
+        "
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+      ></tr>
+    </table>
+  </mat-card-content>
+  <div class="pagination">
+    <mat-paginator
+      [pageSizeOptions]="[10, 15, 100]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</mat-card>

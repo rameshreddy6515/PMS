@@ -1,0 +1,58 @@
+<mat-toolbar>
+  <span class="fill-remaining-space"></span>
+  <span style="color: red;">List of Physician</span>
+  <span class="fill-remaining-space"></span>
+</mat-toolbar>
+<div class="search-div">
+  <button mat-raised-button (click)="onCreate()">
+    <mat-icon>add</mat-icon>Add Physician
+  </button>
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter($event)"
+      #input>
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="datasource">
+    <ng-container matColumnDef="Employee ID">
+      <mat-header-cell *matHeaderCellDef>Employee ID</mat-header-cell>
+      <mat-cell *matCellDef="let physician">{{physician.empId}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="Employee Name">
+      <mat-header-cell *matHeaderCellDef>Employee Name</mat-header-cell>
+      <mat-cell *matCellDef="let physician">{{physician.firstName+" "+physician.lastName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="DOB">
+      <mat-header-cell *matHeaderCellDef>DOB</mat-header-cell>
+      <mat-cell *matCellDef="let physician">{{physician.dob}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="STATUS">
+      <mat-header-cell *matHeaderCellDef>STATUS</mat-header-cell>
+      <mat-cell *matCellDef="let physician">{{physician.status}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data found.
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':datasource!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(datasource!=null && datasource.data.length==0)}"></mat-footer-row>
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No matching data found with {{input.value}}</td>
+    </tr>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>

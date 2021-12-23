@@ -1,0 +1,25 @@
+<mat-list role="list" *ngFor="let appointmentDetails of listOfAppointments">
+    <mat-card class="example-card">
+    
+  
+    <mat-card-content>
+        <p>{{ appointmentDetails.appointmentTime }}</p>
+      </mat-card-content>
+    <mat-card-title> {{ appointmentDetails.meetingTitle }}</mat-card-title>
+    <mat-card-subtitle> {{ appointmentDetails.description }}</mat-card-subtitle>
+  
+    <button   class="position-button position-button_pink"  mat-button>Patient Details</button>
+    <button  class="position-button-edit-history position-button-edit-history_pink"  mat-button>Edit History</button> 
+
+   
+
+
+</mat-card>
+</mat-list>
+<!-- i.	Meeting title 
+ii.	Description 
+iii.	Physician
+iv.	Date 
+v.	Time 
+vi.	Patient Details (link to patient details screen)
+vii.	Edit History (Default Value - Not Applicable) -->

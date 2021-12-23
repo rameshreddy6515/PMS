@@ -1,0 +1,42 @@
+ <div>
+  <mat-icon  mat-dialog-close class="pull-right close-icon">close</mat-icon>
+  <h4 class="dialog-headline">Create Note
+</h4>
+ </div>
+<form class="createNoteForm" [formGroup]="form">
+<mat-form-field appearance="fill">
+  <mat-label>Message</mat-label>
+  <textarea  matInput required formControlName="message"  [formControl]="messageValidator"></textarea>
+  <mat-error *ngIf="messageValidator.invalid">Message is required</mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Urgency Level</mat-label>
+  <select matNativeControl required formControlName="urgencyLevel"  [formControl]="urgencyValidator">
+    <option value="Urgent">Urgent</option>
+    <option value="Not Urgent">Not Urgent</option>
+  </select>
+  <mat-error *ngIf="urgencyValidator.invalid">Urgency Level is required</mat-error>
+
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Receiver Designation</mat-label>
+  <select matNativeControl required formControlName="receiverDesignation"  [formControl]="receiverDesignationValidator"  [(ngModel)]="selectedReceieverType" (change)="getEmployeeList()">
+    <option value="Physician">Physician</option>
+    <option value="Nurse">Nurse</option>
+  </select>
+  <mat-error *ngIf="receiverDesignationValidator.invalid">Receiver Designation is required</mat-error>
+
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Receiver Name</mat-label>
+  <select matNativeControl required formControlName="receiverName"  [formControl]="receiverNameValidator">
+    <option  *ngFor="let names of namesList" [value]="names">  {{names}}</option>
+  </select>
+  <mat-error *ngIf="receiverNameValidator.invalid">Receiver Name is required</mat-error>
+
+</mat-form-field>
+
+<button
+class="position-button position-button_blue"
+mat-raised-button (click)="sendNote()">Send Note</button> 
+</form>
